@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  width: 100px;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgb(109, 106, 106);
+  justify-items: center;
+}
+
+
+

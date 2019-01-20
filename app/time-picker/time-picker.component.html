@@ -1,0 +1,36 @@
+
+<div id="watch" class="wrapper" >
+  <div>
+      <button mat-icon-button (click)="upHour()">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+  </div>
+  <div>
+      <button mat-icon-button (click)="upMinute()">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+  </div>
+
+  <div>
+    <mat-form-field style="width:22px;">
+        <input disabled  matInput type="text" [(ngModel)]="resultHour" maxlength="2">
+      </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field style="width:22px;">
+        <input disabled  matInput type="text" [(ngModel)]="resultMin" maxlength="2">
+    </mat-form-field>
+  </div>
+
+  <div>
+      <button mat-icon-button (click)="downHour()">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+  </div>
+  <div>
+      <button mat-icon-button (click)="downMinute()">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+  </div>
+</div>
+

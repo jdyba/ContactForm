@@ -1,0 +1,120 @@
+
+<div>
+<form ngClass="boxForm" id="myForm" [formGroup]="addOrder" (ngSubmit)="onSubmit()">
+  <h2 id="top">Zamów przejazd</h2>
+
+<div ngClass="wrapper">
+      <mat-form-field>
+        <input type="text" matInput id="place" formControlName="place" placeholder="Miejsce podstawienia autokaru">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="text" matInput id="dateDeparture" [matDatepicker]="dateDeparture" formControlName="dateDeparture" placeholder="Data podstawienia autokaru">
+          <mat-datepicker-toggle matSuffix [for]="dateDeparture" ></mat-datepicker-toggle>
+          <mat-datepicker #dateDeparture></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+          <input type="text" matInput id="dateArrival" [matDatepicker]="dateArrival" formControlName="dateArrival" placeholder="Data powrotu autokaru">
+          <mat-datepicker-toggle matSuffix [for]="dateArrival"></mat-datepicker-toggle>
+          <mat-datepicker #dateArrival></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field >
+          <mat-select  id="bus" formControlName="bus" placeholder="Wybierz autokar">
+            <mat-option *ngFor="let bus of listBus; let i = index;" [value]="bus"> <img src="/assets/2.png">{{bus}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+
+
+
+
+  <div id="numberPeople" ngClass="peopleStyle">
+    <mat-form-field>
+      <input type="text" [maxLength]="3" matInput id="people" formControlName="people" placeholder="Ilość osób" [value]="addOrder.get('people').value">
+    </mat-form-field>
+    <mat-slider  [min]="1" [max]="100" [step]="1" [tickInterval]="10" thumbLabel formControlName="people"></mat-slider>
+  </div>
+  <div id="time" ngClass="timeBox">
+    <label style="color: rgba(123, 122, 122, 0.9);" for="time">Godzina podstawienia autokaru</label>
+    <ngb-timepicker formControlName="timer"></ngb-timepicker>
+  </div>
+
+
+    <mat-form-field>
+        <input ngClass="inputStyle" type="text" matInput id="contactName" formControlName="contactName" placeholder="Imię i nazwisko*">
+    </mat-form-field>
+    <mat-form-field>
+        <input ngClass="inputStyle" type="text" matInput id="contactEmail" formControlName="contactEmail" placeholder="E-mail kontaktowy*">
+    </mat-form-field>
+    <mat-form-field>
+        <input ngClass="inputStyle" matInput id="contactPhone" formControlName="contactPhone" placeholder="Telefon kontaktowy*">
+    </mat-form-field>
+
+  <mat-form-field ngClass="messageBox">
+      <textarea matInput ngClass="inputStyle" [rows]="8" id="contactDescribe" formControlName="contactDescribe" placeholder="Opisz trasę przejazdu*"></textarea>
+  </mat-form-field>
+  <mat-radio-group ngClass="optionsBox" formArrayName="options">
+    <div *ngFor="let option of addOrder.get('options')['controls']; let i = index">
+      <mat-slide-toggle [formControlName]="i"> {{listOptions[i]}} </mat-slide-toggle>
+    </div>
+  </mat-radio-group>
+
+  <button mat-button ngClass="buttonSendBox buttonStyle" type="submit">Wyślij</button>
+  <button mat-button ngClass="buttonStyle" type="button" (click)="onReset()">Reset</button>
+
+</div>
+</form>
+
+
+
+
+<div id="result" style="min-height: 500px;">
+    <div ngClass="wrapper" *ngIf="this.success ===true" >
+      <div>
+        <span>Zamówienie od:</span>
+       <h4>{{messageOrder.contactName}}</h4>
+      </div>
+      <div>
+        <span>Miejsce podstawienia autokaru: </span>
+        <h4>{{messageOrder.place}}</h4>
+      </div>
+      <div>
+        <span>Godzina podstawienia autokaru:</span>
+        <h4>{{messageOrder.timer}}</h4>
+      </div>
+      <div>
+        <span>Ilość osób:</span>
+        <h4>{{messageOrder.people}}</h4>
+      </div>
+      <div>
+        <span>Data podstawienia autokaru: </span>
+        <h4>{{messageOrder.dateDeparture | date:'dd-MM-yy'}}</h4>
+      </div>
+      <div>
+        <span>Data powrotu autokaru: </span>
+        <h4>{{messageOrder.dateArrival | date:'dd-MM-yy'}}</h4>
+      </div>
+      <div>
+        <span>Trasa przejazdu: </span>
+        <h4>{{messageOrder.contactDescribe}}</h4>
+      </div>
+      <div>
+        <span>Email kontaktowy: </span>
+        <h4>{{messageOrder.contactEmail}}</h4>
+      </div>
+      <div>
+        <span>Telefon kontaktowy: </span>
+        <h4>{{messageOrder.contactPhone}}</h4>
+      </div>
+      <div>
+        <span> Zlecający zapewnia:</span>
+        <ul>
+            <li *ngFor="let item of messageOrder.options">{{item}}</li>
+        </ul>
+      </div>
+      <div>
+          <button ngClass="buttonStyle" mat-button type="Button" (click)="newOrder()">Nowe zlecenie</button>
+      </div>
+    </div>
+</div>
+<p>First angular Deploy </p>
+</div>
